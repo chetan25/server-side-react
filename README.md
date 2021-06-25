@@ -1,3 +1,8 @@
+---
+title: Simple SSR React App.
+excerpt: Building a simple SSR react app to learn the SSR basics.
+Tools: ['Express', 'React', 'Redux', 'ReactDOM' 'Webpack']
+---
 
 ### SSR APP
 Simple app to practice SSR with React.
