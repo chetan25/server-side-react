@@ -1,4 +1,6 @@
-// common js pattern
+/**
+ *  common js pattern
+ * */
 // const express = require('express');
 // const React = require('react');
 // const renderToString = require('react-dom/server').renderToString;
@@ -6,16 +8,17 @@
 
 // since we are runnign through webpack we can use es6
 import express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom';
-import Home from './client/components/home';
+import renderApp from './helpers/renderer';
 
 const app = express();
 
-app.get('/', (req, res) => {
-   const content = renderToString(<Home />);
+// expose public for access
+app.use(express.static('public'));
 
-   res.send(content);
+app.get('*', (req, res) => {
+   const html = renderApp(req);
+   
+   res.send(html);
 });
 
 app.listen(3000, () => {

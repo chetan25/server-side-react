@@ -1,6 +1,9 @@
 const path = require('path');
+const baseConfig = require('./webpack.common');
+const merge = require('webpack-merge');
+const webpackNodeExternals = require('webpack-node-externals');
 
-module.exports = {
+module.exports = merge(baseConfig, {
     // tell webapck that the bundle is for node
     target: 'node',
     entry: './src/server.js',
@@ -8,21 +11,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')
     },
-    // run bable on every file
-    module: {
-        rules: [
-            {
-                test: /\.js?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                options: {
-                    presets: [
-                        'react',
-                        'stage-0',
-                        ['env', { targets: { browsers: ['last 2 versions'] }}]
-                    ]
-                }
-            }
-        ]
-    }    
-}
+    externals: [
+        webpackNodeExternals()
+    ]    
+});
