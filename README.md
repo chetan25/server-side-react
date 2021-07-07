@@ -43,7 +43,11 @@ Make sure the HTML generated from Server is same as Client
 - StaticRouter is used for SSR.
 - 
 
-
+##### Server Side Data Challenges
+- Redux needs different configuration for server and client.
+- Needs some way to detect when the initial data load action creator are completed on server. In client side we don't care as the action creator would finish and our app would re-render.
+- Need state hydration on the browser.
+- Auth needs to be handled in server, normally we do it in browser, since we have cookie based authentication.
 
 
 #### Local development
