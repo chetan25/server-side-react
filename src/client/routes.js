@@ -1,13 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import Home from './components/home';
+import Userlist, {loadData} from './components/users-list';
 
 // route api - https://react-ssr-api.herokuapp.com/
 
-export default () => {
-    return (
-        <div>
-          <Route exact path='/' component={Home} />
-        </div>
-    );
-}
+// to work woth react-router-config
+export default [
+  {
+    path: '/',
+    component: Home,
+    exact: true
+  },
+  {
+    path: '/users',
+    component: Userlist,
+    loadData
+  }
+];

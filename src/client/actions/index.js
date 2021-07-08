@@ -8,5 +8,5 @@ export const fetchUsers = () => async dispatch => {
    dispatch({
        type: FETCH_USERS,
        payload: res
-   })
+   });
 }
