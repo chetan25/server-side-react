@@ -53,9 +53,15 @@ Make sure the HTML generated from Server is same as Client
 - Will attach a function to all components that will describe the data that component needs.
 - We will figure out what component would be rendered based on the URL.(using `react-router-config`). We will need to define our routes as array of objects.
 - Than we will call that method on each component to load data for that component.
+- We need to pass store to the load function, since the app is not rendered and Provider is not setup.
+- We also call dispatch manually to follow the normal process of redux.
 - Wait for request to finish.
 - Than render the app with all the data.
 - This approach is similar to NextJs server side approach.
+
+### State Hydration in Browser
+- After rendering HTML in server, we will dump all our state data into html template.
+- Then in Client side store creation, we will use that as second argument.
 
 **Important**
 If you are using es6 features like async in server side react code, it would assume that there is "regeneratorRuntime" defined in working environment for babel. To make it work we have to import babel polyfill in root of index.  

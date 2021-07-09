@@ -9,8 +9,10 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import { renderRoutes } from 'react-router-config';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const initialState =  window.INITIAL_STATE;
+const store = createStore(reducers, initialState, applyMiddleware(thunk));
 
+console.log(store.getState(), 'store');
 ReactDOM.hydrate(
     <Provider store={store}>
         <BrowserRouter>

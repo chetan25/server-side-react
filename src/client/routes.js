@@ -1,5 +1,5 @@
-import Home from './components/home';
-import Userlist, {loadData} from './components/users-list';
+import HomePage from './pages/home';
+import UserlistPage from './pages/users-list';
 
 // route api - https://react-ssr-api.herokuapp.com/
 
@@ -7,12 +7,12 @@ import Userlist, {loadData} from './components/users-list';
 export default [
   {
     path: '/',
-    component: Home,
+    component: HomePage.component,
     exact: true
   },
   {
     path: '/users',
-    component: Userlist,
-    loadData
+    component: UserlistPage.component,
+    loadData: UserlistPage.loadData
   }
 ];

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchUsers } from '../actions'
 import { connect } from 'react-redux';
 
-class Userlist extends Component {
+class UserlistPage extends Component {
     componentDidMount() {
        // fetch users
        this.props.fetchUsers();
@@ -30,9 +30,12 @@ function mapStateToprops(state) {
     }
 }
 
+// we need to pass store here since, the app is not rendered and Provider is not setup
 function loadData(store) {
    return store.dispatch(fetchUsers());
 }
 
-export { loadData };
-export default connect(mapStateToprops, { fetchUsers })(Userlist);
+export default {
+    component: connect(mapStateToprops, { fetchUsers })(UserlistPage),
+    loadData: loadData
+};
