@@ -13,15 +13,28 @@ import renderApp from './helpers/renderer';
 import createServerStore from './helpers/store-server';
 import Routes from './client/routes';
 import { matchRoutes } from 'react-router-config';
+import proxy from 'express-http-proxy';
 
 const app = express();
+
+// set proxy, we will proxy all request that begin with '/api'
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
+    // this is just for this app to make sure the google auth works fine with our localhost from the proxy srver
+    proxyReqOptDecorator(opts) {
+        // this will let the use redirec back to localhost ater login.
+        // since the api server will look at this header and redirct back to localhost
+        opts.headers['x-forwarded-host'] = 'localhost:3000';
+
+        return opts;
+    }
+}));
    
 // expose public for access
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
     // creating store, so we have a handle on store and we can detect data loading.
-    const store = createServerStore();
+    const store = createServerStore(req);
     
     const components = matchRoutes(Routes, req.path);
     // loadData will return the underlyig promise

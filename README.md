@@ -66,6 +66,19 @@ Make sure the HTML generated from Server is same as Client
 **Important**
 If you are using es6 features like async in server side react code, it would assume that there is "regeneratorRuntime" defined in working environment for babel. To make it work we have to import babel polyfill in root of index.  
 
+
+#### Authentication with SSR
+- We will setup a proxy to proxy request made from browser to render server to the API server.
+- Any action creator we call while rendering will be sent off directly to api server.
+- We have to make sure the exact same action creators called from browser, are passed to proxy and than to api server.
+- For creating a proxy we will use 'express-http-proxy'.
+- We will take the cookie info from the initial browser request and append it to our request that we make from proxy to the api server, to assure api server the request is coming from the browser that is authenticated.
+- We will create separate instances of Axios and configure them with the baseUrl.
+- Then we would use thunk, hidden feature while initializing middleware, 'withExtraArgument' function to pass this new instance of axios.
+- Thunk generally calls the action creator with three arguments,  dispatch, getState and the argument we passed when we initialized thunk.
+- 
+
+
 #### Local development
 - `npm run dev:build-server` to compile the server code
 - `npm run dev:server` to run the server
