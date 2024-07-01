@@ -4,7 +4,7 @@ Excerpt: Building a simple SSR react app to learn the SSR basics.
 Tech: "SSR, Express, React, Redux, ReactDOM, Webpack"
 ---
 
-### SSR APP
+# SSR APP
 
 Simple app to practice SSR with React.
 
@@ -14,7 +14,7 @@ It contains:
 - Rendering Server(View Layer) - takes data and produces html. Since we use React, this would be using some react logic.
 - Having a separate Rendering server, we have separation of concerns and also gives flexibility to replace the rendering server with any framework. It also provide scalability.
 
-#### Workflow
+## Workflow
 
 - To render component from server side we are using the `renderToString` function of `ReactDOM`.
 - Which will render bunch of components and produce a string out of all the resulting html.
@@ -27,7 +27,7 @@ It contains:
 **_ Note _**
 Make sure the HTML generated from Server is same as Client
 
-#### Render flow
+## Render flow
 
 - App rendered by server into some element. This is just a skeleton, minus the handlers.
 - This rendered app is sent to user browser and browser renders the HTML and loads the client side bundle.
@@ -36,7 +36,7 @@ Make sure the HTML generated from Server is same as Client
 - When we render the React app on client side, React compares the new html with what already exists in that element. This process is called hydration.
 - React takes over the existing rendered app, binds event handlers, etc
 
-#### Routing
+## Routing
 
 - Express will pass all route request to React router to manage.
 - Express will always respond with 'index.html' that will boot react and than React router will decide what to load.
@@ -46,14 +46,14 @@ Make sure the HTML generated from Server is same as Client
 - StaticRouter is used for SSR.
 -
 
-##### Server Side Data Challenges
+## Server Side Data Challenges
 
 - Redux needs different configuration for server and client.
 - Needs some way to detect when the initial data load action creator are completed on server. In client side we don't care as the action creator would finish and our app would re-render.
 - Need state hydration on the browser.
 - Auth needs to be handled in server, normally we do it in browser, since we have cookie based authentication.
 
-### Data loading in Server
+## Data loading in Server
 
 - Will attach a function to all components that will describe the data that component needs.
 - We will figure out what component would be rendered based on the URL.(using `react-router-config`). We will need to define our routes as array of objects.
@@ -64,7 +64,7 @@ Make sure the HTML generated from Server is same as Client
 - Than render the app with all the data.
 - This approach is similar to NextJs server side approach.
 
-### State Hydration in Browser
+## State Hydration in Browser
 
 - After rendering HTML in server, we will dump all our state data into html template.
 - Then in Client side store creation, we will use that as second argument.
@@ -72,7 +72,7 @@ Make sure the HTML generated from Server is same as Client
 **Important**
 If you are using es6 features like async in server side react code, it would assume that there is "regeneratorRuntime" defined in working environment for babel. To make it work we have to import babel polyfill in root of index.
 
-#### Authentication with SSR
+## Authentication with SSR
 
 - We will setup a proxy to proxy request made from browser to render server to the API server.
 - Any action creator we call while rendering will be sent off directly to api server.
@@ -84,7 +84,7 @@ If you are using es6 features like async in server side react code, it would ass
 - Thunk generally calls the action creator with three arguments, dispatch, getState and the argument we passed when we initialized thunk.
 -
 
-#### Local development
+## Local development
 
 - `npm run dev:build-server` to compile the server code
 - `npm run dev:server` to run the server
